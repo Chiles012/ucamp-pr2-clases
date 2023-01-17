@@ -1,0 +1,26 @@
+/* Generales */
+body {
+    background-color: #444;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Login */
+.container-login {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-login form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
