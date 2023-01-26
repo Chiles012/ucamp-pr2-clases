@@ -1,29 +1,47 @@
-const butonCancel = document.querySelector('.buton-cancel')
-const buton2 = document.querySelectorAll('.buton')[1];
-const date = document.querySelector('#date')
+const input_nombre = document.querySelector('#nombre');
+const button_submit = document.querySelector('#add');
+const content = document.querySelector('.content');
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    const paragraph = document.createElement('p');
-    const text = document.createTextNode('Hola mundo!');
+    const nombres = JSON.parse(localStorage.getItem('nombres'));
 
-    paragraph.appendChild(text);
+    // null = false !false = true
+    if (!nombres) {
+        const p = document.createElement('p');
+        const text = document.createTextNode('No hay elementos')
+        p.appendChild(text)
+        content.appendChild(p)
+    } else {
+        if (nombres.length > 0) {
+            for ( let i = 0; i < nombres.length; i++ ) {
+                const p = document.createElement('p');
+                const text = document.createTextNode(nombres[i])
+                p.appendChild(text)
+                content.appendChild(p)
+            }
+        } else {
+            const p = document.createElement('p');
+            const text = document.createTextNode('No hay elementos')
+            p.appendChild(text)
+            content.appendChild(p)
+        }
+    }
 
-    butonCancel.appendChild(paragraph);
+    button_submit.addEventListener('click', function() {
+        const nombres = JSON.parse(localStorage.getItem('nombres')) || [];
+        const nuevoNombre = input_nombre.value;
+        nombres.push(nuevoNombre);
+        localStorage.setItem('nombres', JSON.stringify(nombres));
 
-    butonCancel.classList.add('buton');
+        content.innerHTML = '';
 
-    date.addEventListener('change', function(e) {
-        console.log(e.target.value);
-    });
-
-    buton2.addEventListener("click", function(e) {
-        console.log(e)
-        console.log('boton 2');
+        for ( let i = 0; i < nombres.length; i++ ) {
+            const p = document.createElement('p');
+            const text = document.createTextNode(nombres[i])
+            p.appendChild(text)
+            content.appendChild(p)
+        }
     })
-
+   
 });
-
-function alertJS(message) {
-    alert(message);
-}
